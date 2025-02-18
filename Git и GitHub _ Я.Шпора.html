@@ -1,0 +1,886 @@
+
+<!-- saved from url=(0102)https://code.s3.yandex.net/Python-dev/cheatsheets/086-git-i-github-shpora/086-git-i-github-shpora.html -->
+<html><div id="in-page-channel-node-id" data-channel-name="in_page_channel_tSY7pD"></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Git и GitHub&nbsp;| Я.Шпора</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style>
+<link rel="apple-touch-icon" sizes="180x180" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/favicon-16x16.png">
+<link rel="manifest" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/site.webmanifest">
+<link rel="mask-icon" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="../static/ico/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link href="./Git и GitHub _ Я.Шпора_files/prism.css" rel="stylesheet">
+<script src="./Git и GitHub _ Я.Шпора_files/prism.js.загрузка"></script>
+<link href="./Git и GitHub _ Я.Шпора_files/custom.css" rel="stylesheet">
+<script src="./Git и GitHub _ Я.Шпора_files/custom.js.загрузка"></script>
+<!--<base target="_blank">--><base href="." target="_blank">
+<style>
+@keyframes slide-in-one-tap {
+  from {
+    transform: translateY(80px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.trust-hide-gracefully {
+  opacity: 0;
+}
+
+.trust-wallet-one-tap .hidden {
+    display: none;
+  }
+
+.trust-wallet-one-tap .semibold {
+    font-weight: 500;
+  }
+
+.trust-wallet-one-tap .binance-plex {
+    font-family: 'Binance';
+  }
+
+.trust-wallet-one-tap .rounded-full {
+    border-radius: 50%;
+  }
+
+.trust-wallet-one-tap .flex {
+    display: flex;
+  }
+
+.trust-wallet-one-tap .flex-col {
+    flex-direction: column;
+  }
+
+.trust-wallet-one-tap .items-center {
+    align-items: center;
+  }
+
+.trust-wallet-one-tap .space-between {
+    justify-content: space-between;
+  }
+
+.trust-wallet-one-tap .justify-center {
+    justify-content: center;
+  }
+
+.trust-wallet-one-tap .w-full {
+    width: 100%;
+  }
+
+.trust-wallet-one-tap .box {
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
+    animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
+    width: 384px;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1020;
+  }
+
+.trust-wallet-one-tap .header {
+    gap: 15px;
+    border-bottom: 1px solid #E6E6E6;
+    padding: 10px 18px;
+  }
+
+.trust-wallet-one-tap .header .left-items {
+      gap: 15px
+    }
+
+.trust-wallet-one-tap .header .title {
+      color: #1E2329;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 28px;
+    }
+
+.trust-wallet-one-tap .header .subtitle {
+      color: #474D57;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .header .close {
+      color: #1E2329;
+      cursor: pointer;
+    }
+
+.trust-wallet-one-tap .body {
+    padding: 9px 18px;
+    gap: 10px;
+
+  }
+
+.trust-wallet-one-tap .body .right-items {
+      gap: 10px;
+      width: 100%;
+    }
+
+.trust-wallet-one-tap .body .right-items .wallet-title {
+        color: #1E2329;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .body .right-items .wallet-subtitle {
+        color: #474D57;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .connect-indicator {
+    gap: 15px;
+    padding: 8px 0;
+  }
+
+.trust-wallet-one-tap .connect-indicator .flow-icon {
+      color: #474D57;
+    }
+
+.trust-wallet-one-tap .loading-color {
+    color: #FFF;
+  }
+
+.trust-wallet-one-tap .button {
+    border-radius: 50px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    background-color: rgb(5, 0, 255);
+    border-color: rgb(229, 231, 235);
+    cursor: pointer;
+    text-align: center;
+    height: 45px;
+  }
+
+.trust-wallet-one-tap .button .button-text {
+      color: #FFF;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .footer {
+    margin: 20px 30px;
+  }
+
+.trust-wallet-one-tap .check-icon {
+    color: #FFF;
+  }
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Regular.otf) format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Medium.otf) format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-SemiBold.otf) format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+</style></head><body><article id="cd300978-c219-4886-8eb1-e288e5eb5a3a" class="page sans"><header><h1 class="page-title">Git и GitHub<strong>&nbsp;| Я.Шпора</strong></h1><p class="page-description"></p></header><div class="page-body"><h2 id="e12e11bb-5e11-48de-bde8-b1f3d924ada6" class="">Настройка Git</h2><h3 id="274b19e0-3804-4097-a182-f7678eaca462" class=""><strong>Если Git установлен</strong></h3><p id="ab7f6b53-0847-4444-9477-b9e204983de6" class="">Проверить наличие Git на компьютере:</p><pre id="1feecc88-ba1b-4a98-9e87-642df6799375" class="code language-bash" tabindex="0"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all"><span class="token function">git</span> <span class="token parameter variable">--version</span></code></pre><p id="cb94327c-7e09-4c28-8ea1-11324a2f1507" class="">Если Git установлен, выведется подобное сообщение:</p><pre id="bce6ddb9-887e-4031-a482-1027ca148554" class="code language-bash" tabindex="0"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all"><span class="token function">git</span> version <span class="token number">2.30</span>.0</code></pre><h3 id="ef012a24-1d76-4700-aaec-62f83ecbf2b3" class=""><strong>Если Git не установлен</strong></h3><p id="04c8a4cc-872d-432c-800e-00627c6a51ef" class="">Git можно установить при помощи инсталлятора <a href="https://git-scm.com/">с официального сайта</a> или через пакетный менеджер, например <a href="https://brew.sh/">Homebrew</a> для macOS или APT для Linux.</p><h3 id="d03fe149-26d9-4d85-8ba6-515537beea2d" class=""><strong>Базовые настройки Git</strong></h3><p id="91c9aae7-4996-40f8-8e93-861c930e9bea" class="">В программе укажите ваше имя. Откройте Git Bash на Windows или терминал на Linux/macOS и выполните команду:</p><pre id="25c55856-20d0-4537-aac2-352ca6785cc0" class="code language-shell" tabindex="0"><code class="language-shell" style="white-space:pre-wrap;word-break:break-all"><span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name <span class="token string">"Имя Фамилия"</span></code></pre><p id="871ab429-16ec-45c5-a265-ffd30b6e4c61" class="">Это имя будет применяться для всех репозиториев на вашем компьютере. Можно проверить установленное ранее значение с помощью команды:</p><pre id="15f47e7f-669a-43ac-8c8f-526ba2ad834f" class="code language-shell" tabindex="0"><code class="language-shell" style="white-space:pre-wrap;word-break:break-all">$ <span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name</code></pre><p id="ee469fdf-61ca-40ca-8ec5-271fb24d02e7" class="">Далее укажите ваш действующий адрес электронной почты:</p><pre id="4f31a080-3708-488e-b01a-ea026220dc0e" class="code language-shell" tabindex="0"><code class="language-shell" style="white-space:pre-wrap;word-break:break-all"><span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email <span class="token string">"stas.basov@whatever.com"</span></code></pre><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="0fad9ca6-219e-4c6a-bbd7-5d814f1283c9"><div style="font-size:1.5em"><img class="icon" src="./Git и GitHub _ Я.Шпора_files/light-bulb_green.svg"></div><div style="width:100%">Эту конфигурацию нужно выполнить только один раз при первой настройке Git.</div></figure><h2 id="2023ddd8-0e19-4591-8b7a-9cbd6eac3676" class="">Настройка GitHub</h2><p id="807af33d-42de-422a-9410-b7660a808b16" class="block-color-default">Регистрация в веб-сервисе GitHub осуществляется <a href="https://github.com/signup">на сайте</a>. Для регистрации нужно указать свой электронный адрес, придумать пароль и задать имя пользователя. Далее следует подтвердить регистрацию, используя код из письма, которое придёт на указанную почту.</p><h3 id="e13704f0-62ed-4bb8-9dbe-a559f377d00e" class=""><strong>Настройка связи между компьютером и GitHub: SSH-ключи</strong></h3><ol type="1" id="ea4e6336-a431-4923-9528-b4cbcb8c1498" class="block-color-default numbered-list" start="1"><li>Запустите Git Bash на Windows или терминал на Linux/macOS. Выполните команду <code>ssh-keygen</code>.</li></ol><ol type="1" id="2dd8ff16-2f17-411a-ba00-3965463fb51c" class="block-color-default numbered-list" start="2"><li>Консоль попросит ввести путь к файлу, в который будут сохранены сгенерированные ключи, и одновременно предложит сохранить их в файл по умолчанию.</li></ol><ol type="1" id="e7cc65cf-5caa-4a79-a0e5-3187a6806039" class="block-color-default numbered-list" start="3"><li>Сохраните ключи в папку по умолчанию: для этого нажмите <strong>Enter</strong> на Windows или <strong>Return </strong>на macOS.</li></ol><ol type="1" id="9aa7af0d-8e32-45b0-9c74-223c4924284c" class="block-color-default numbered-list" start="4"><li>При создании ключей система попросит придумать пароль для доступа к ключам. Когда вы будете вводить пароль, в терминале ничего не отобразится, даже звёздочки.</li></ol><ol type="1" id="c9b73c5c-051c-4176-bfff-bd0ee42451a2" class="numbered-list" start="5"><li>Выведите открытый ключ в терминал командой <code>cat .ssh/id_rsa.pub</code>.</li></ol><ol type="1" id="6a207f59-95f0-41f8-b782-be9226adbd04" class="numbered-list" start="6"><li>Скопируйте ключ от символов <code>ssh-rsa</code> включительно и до конца.</li></ol><ol type="1" id="39f35e3f-76cc-4ab1-8530-7ecb72b757d3" class="numbered-list" start="7"><li>Зайдите в свой аккаунт на GitHub, перейдите в раздел настроек:</li></ol><figure id="35a15c4e-24c1-4a68-bcf0-81846e0ecf04" class="image"><a href="./Git и GitHub _ Я.Шпора_files/56.png"><img style="width:2880px" src="./Git и GitHub _ Я.Шпора_files/56.png"></a></figure><ol type="1" id="3d9e85a4-815f-45ae-8726-6391872d98e5" class="numbered-list" start="8"><li>Выберите пункт <strong>SSH and GPG keys</strong>; для создания нового ключа нажмите на кнопку <strong>New SSH key</strong> в правом верхнему углу:</li></ol><figure id="792c1239-d6f2-40b6-a6a4-c7b857065341" class="image"><a href="./Git и GitHub _ Я.Шпора_files/57.png"><img style="width:2880px" src="./Git и GitHub _ Я.Шпора_files/57.png"></a></figure><ol type="1" id="008ca359-c2aa-442f-918c-15018dd41dae" class="numbered-list" start="9"><li>Откроется страница с двумя полями ввода. Введите любое имя и вставьте в поле <strong>Key </strong>ключ из буфера обмена.</li></ol><ol type="1" id="a394db07-97c2-41df-9da7-27cf334c7b28" class="numbered-list" start="10"><li>Нажмите кнопку <strong>Add SSH key</strong> — ключ добавится к вашему аккаунту. </li></ol><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="b47f0c9a-7448-4563-8d24-90731f9b0173"><div style="font-size:1.5em"><img class="icon" src="./Git и GitHub _ Я.Шпора_files/light-bulb_green.svg"></div><div style="width:100%">Если вы захотите получить SSH-доступ к своему аккаунту на GitHub с нескольких компьютеров, для каждого из них должен быть создан и добавлен свой SSH-ключ.</div></figure><h2 id="ec397232-b612-4b4f-acb4-00bd4151ee85" class="">Создание и клонирование репозиториев</h2><h3 id="0a343dbc-ad97-4b81-b1a4-e5dc4fb9c132" class=""><strong>Как создать локальный Git-репозиторий</strong></h3><ol type="1" id="6855e511-113b-40cb-8f77-b4c9a0f20555" class="numbered-list" start="1"><li>Откройте терминал и перейдите в директорию с вашим проектом:</li></ol><pre id="79074b74-f966-40e5-b056-5436ac73bbf1" class="code language-bash" tabindex="0"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all"><span class="token builtin class-name">cd</span> /Dev/first_project</code></pre><ol type="1" id="bedf08fb-bdc9-4938-9508-def2a13de5d3" class="numbered-list" start="2"><li>Инициализируйте новый Git-репозиторий командой:</li></ol><pre id="99965018-f4e1-4b39-b50f-91fa1a67dde7" class="code language-bash" tabindex="0"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all"><span class="token function">git</span> init</code></pre><h3 id="3896e5a8-26c8-4da5-9443-cd25efe64995" class="block-color-default"><strong>Как </strong><strong>скопировать</strong><strong> репозиторий</strong></h3><p id="46a3984b-5c3c-4f97-a66c-9b193d7ff96c" class="block-color-default">Операция копирования чужого репозитория в свой аккаунт называется «форк», этот процесс происходит на сайте GitHub. Чтобы форкнуть репозиторий, нужно зайти в него на сайте GitHub и нажать кнопку <strong>Fork</strong>:</p><figure id="6867f255-7d73-4c3c-889d-c3f7c8aa4343" class="image"><a href="./Git и GitHub _ Я.Шпора_files/59.png"><img style="width:2880px" src="./Git и GitHub _ Я.Шпора_files/59.png"></a></figure><h3 id="86ed8293-8942-4339-b0b6-c8945ee7ccae" class="block-color-default"><strong>Как клонировать репозиторий</strong></h3><ol type="1" id="47bc90bd-6b3d-4df3-ab1f-d9b7f25c60b2" class="block-color-default numbered-list" start="1"><li>На GitHub перейдите в репозиторий, который хотите клонировать, и скопируйте ссылку на него со вкладки SSH:<figure id="403ae677-a792-4174-b920-83a886e69518" class="image"><a href="./Git и GitHub _ Я.Шпора_files/S2_188.png"><img style="width:2880px" src="./Git и GitHub _ Я.Шпора_files/S2_188.png"></a></figure></li></ol><ol type="1" id="7f8e17f5-03f2-40f8-aaee-54197203b7ab" class="block-color-default numbered-list" start="2"><li>На компьютере перейдите в директорию, куда хотите клонировать репозиторий, с помощью команды <code>cd</code>.</li></ol><ol type="1" id="cdc228b0-011e-4411-953e-cba13fb04de4" class="block-color-default numbered-list" start="3"><li>Клонируйте репозиторий:<pre id="b5cee214-8859-4600-8e0f-a39e33e07d87" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> clone <span class="token operator">&lt;</span>ссылка_на_репозиторий<span class="token operator">&gt;</span></code></pre></li></ol><h2 id="19e4a140-6294-4b2a-8f96-73b101e24905" class="">Основные команды для работы с Git</h2><h3 id="7970be5a-bfd4-43e6-bf2e-06caeb92fdf3" class=""><strong>Узнать состояние репозитория</strong></h3><pre id="5382f7bc-646a-4369-b856-90bc1553148c" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> status</code></pre><h3 id="0d0376b7-094a-4e2a-9219-e302035306e4" class="block-color-default"><strong>Добавить изменения в индекс</strong></h3><p id="8873b7b2-a2b9-44b7-b092-0d8feb2e4a8b" class="block-color-default">В конкретном файле:</p><pre id="dddf6b7b-9ed1-453e-87a3-fb301e8d2d32" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>название_файла<span class="token operator">&gt;</span></code></pre><p id="1feb2745-680f-4887-a9e6-618ddbaac5e7" class="block-color-default">Во всех отслеживаемых файлах сразу:</p><pre id="98af66ba-742c-4fec-8bfc-1d71ec7967c9" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token parameter variable">--all</span></code></pre><p id="fbcc5d0e-7b06-4087-84c2-0c1b9faa99c6" class="block-color-default">Опцию <code>--all</code> можно заменить точкой <code>.</code>.</p><h3 id="6cb68ca1-6f7f-4786-ad76-b35e14bfc88f" class=""><strong>Создать коммит и комментарий к нему</strong></h3><pre id="17d51d17-6972-473f-ab3c-28eab31b56ea" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"Add first commit"</span></code></pre><h3 id="74e32ec2-c1e9-407b-aacd-3786f0845ae7" class=""><strong>Изменить последний коммит и обновить комментарий</strong></h3><pre id="b58d6a0d-7fe1-415c-8fa7-5a1076fcaa77" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">--amend</span> <span class="token parameter variable">-m</span> <span class="token string">"Текст вашего комментария"</span></code></pre><h3 id="6f96b5c2-8561-4ebe-93b9-88424a35733a" class=""><strong>Отправить коммит на GitHub</strong></h3><pre id="f36e3a50-a723-4775-ad11-e094e37857da" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> push</code></pre><h3 id="67ca8942-7d35-4a98-817f-66f5613f9097" class=""><strong>Удалить ненужные файлы или директории из репозитория</strong></h3><pre id="afdadcfe-ce59-4b83-a876-fd0635d5f013" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> <span class="token function">rm</span> file1.txt</code></pre><p id="b6bcd5ff-4830-4c13-87a5-fcb730c998b2" class="">Чтобы зафиксировать изменения, необходимо сделать коммит после удаления.</p><h3 id="f1297132-7027-46a3-bc28-2265ca940f9c" class=""><strong>Просмотреть историю изменений</strong></h3><pre id="16dee9ff-5b9b-4122-8760-1097ba8a7de1" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> log</code></pre><h3 id="24d105b4-822d-40ba-941f-85bf2411485a" class=""><strong>Просмотреть изменения, внесённые в определённом коммите</strong></h3><pre id="cedec1e4-c19e-4669-8ff2-71633e0c7bb6" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> show id_коммита</code></pre><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="f0df3036-b08b-4118-8e35-874da71b2494"><div style="font-size:1.5em"><img class="icon" src="./Git и GitHub _ Я.Шпора_files/light-bulb_green.svg"></div><div style="width:100%">id_коммита — первые семь символов идентификатора нужного коммита.</div></figure><h3 id="5312b601-d7b5-48cb-917e-9bf7054b3386" class=""><strong>Вернуться к определённому коммиту: откатить изменения</strong></h3><pre id="586d98ec-ea78-4cc4-8ddb-08f4949aef28" class="code language-bash" tabindex="0"><code class="language-bash"><span class="token function">git</span> reset id_коммита</code></pre><p id="9ffbda73-4ec5-4222-aeac-c437727b96d8" class="">Откатиться на один коммит назад в определённом файле:</p><pre id="eec3b23d-1c86-4e8f-8c24-30a911f60210" class="code language-bash" tabindex="0"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all"><span class="token function">git</span> reset HEAD program.py</code></pre><p id="2fb1b2b6-4411-4842-a5b1-232c81244cd7" class="">HEAD указывает на то, что работа будет вестись с последним сделанным коммитом.</p><p id="3f8f2464-708a-4881-92ca-ad1b3b9f9a74" class="">Если не указать имя файла, то в репозитории сбросятся все изменения до состояния последнего коммита.</p><h2 id="38daa1c3-428a-44a9-a99d-3e94a8e42b67" class="block-color-default">Игнорирование файлов</h2><p id="5245c6c7-04a1-452d-9c40-72d7f897fd6d" class="block-color-default">Чтобы файлы не попали в репозиторий, нужно указать названия директорий или имена файлов в текстовом файле <em>.gitignore. </em>Этот файл создаётся в корневой директории проекта.</p><pre id="50f468c4-f194-40dd-acc3-ecf0834c125d" class="code language-plain" tabindex="0"><code class="Text language-plain"># Игнорировать файл README.md.
+README.md
+
+# Игнорировать файл side.txt в директории build.
+build/side.txt
+
+# Игнорировать все файлы с расширением .doc
+*.doc</code></pre><p id="c57e0075-3cac-4c7a-8453-0dc1b5c776c7" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+<div id="footer">
+	<div id="saying" class="sans">
+		<div class="text">На пути к истине мудрый признаёт необходимость шпаргалок, ведущих его сквозь пустыню забытого.</div> 
+        <div class="src">Чинь Ин, Хранитель Императорских Шпор</div>
+	</div>
+</div>
+</body></html>
